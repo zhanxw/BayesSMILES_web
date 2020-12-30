@@ -16,18 +16,15 @@ export default class ScrollToTop extends React.Component {
   scrollFunc() {
     // Get the current scroll value
     let y = window.scrollY;
-    const c = document.documentElement.scrollTop || document.body.scrollTop;
+    // const c = document.documentElement.scrollTop || document.body.scrollTop;
 
     // If the scroll value is greater than the window height, let's add a class to the scroll-to-top button to show it!
     if (y > 0) {
-      // this.state.className = "top-link show";
       this.setState({ buttonClassName: "top-link show"});
-      console.log('top-link show', y, c);
+      // console.log('top-link show', y, c);
     } else {
-      // this.state.className = "top-link hide";
       this.setState({ buttonClassName: "top-link hide"});
-      console.log('top-link hide', y, c);
-
+      // console.log('top-link hide', y, c);
     }
   }
   render() {
@@ -55,7 +52,7 @@ export default class ScrollToTop extends React.Component {
   }
   handleClick(e) {
     e.preventDefault();
-    console.log("in func");
+    // console.log("in func");
     this.scrollToTop();
   }
 }
