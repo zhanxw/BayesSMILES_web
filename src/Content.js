@@ -1,3 +1,5 @@
+import 'bootstrap/dist/js/bootstrap.bundle.min';
+
 import React from 'react';
 import ReactEcharts from 'echarts-for-react';
 // import GridLayout from 'react-grid-layout';
@@ -7,8 +9,6 @@ import ReactEcharts from 'echarts-for-react';
 import US_data from "./us_lag10.json";
 
 
-
-  
 class Content extends React.Component {
     constructor(props) {
         super(props);
@@ -21,9 +21,9 @@ class Content extends React.Component {
             })
     }*/
     render() {
-        console.log("DATA = ", this.state.DATA)
+        // console.log("DATA = ", this.state.DATA)
         const plotList = this.state.DATA.map( (val, idx) => this.drawSubPlot(this.state.DATA, idx))
-        const fig = this.drawSubPlot(this.state.DATA, 0);
+        // const fig = this.drawSubPlot(this.state.DATA, 0);
         /*
                     //create boxes into a grid layout
                     var r = document.getElementById('container');
@@ -51,22 +51,45 @@ class Content extends React.Component {
             {plotList.map( (opt,idx) => (
                 <ReactEcharts key={idx} option = {opt} data-grid={{x: 1, y: 0, w: 3}}/>
             ))}
+
             
-        </div>
-                
-        */
-       console.log('fig=', fig);
-      return (
-    <div className="container" id="container">
-        <div className = "row">
-        {plotList.map( (opt,idx) => (
+                    <div className = "row">
+        {plotList[0:3].map( (opt,idx) => (
                 <ReactEcharts key={idx} option = {opt} className = "col-md-4 shadow" style={{width: "33%"}}/>
             ))}
 
+             <div className = "row">
+          <div className = "col-md-4 shadow" style={{background: 'blue'}} > blue</div>
+          <div className = "col-md-4 shadow" style={{background: 'black'}} > blue</div>
+          <div className = "col-md-4 shadow" style={{background: 'red'}} > blue</div>
+      </div>
+      <div className = "row">
+          <div className = "col-md-4 shadow" style={{background: 'red'}} > blue</div>
+          <div className = "col-md-4 shadow" style={{background: 'blue'}} > blue</div>
+          <div className = "col-md-4 shadow" style={{background: 'black'}} > blue</div>
+      </div>
         </div>
+        </div>
+                
+        */
+       //  console.log('fig=', fig);
+       let figs = [];
+       for (var i = 0; i < this.state.DATA.length; i += 3) {
+           figs.push(
+               <div className = "row" key = {i}>
+               {plotList.slice(i, i + 3).map( (opt, idx) => (
+                   <ReactEcharts key={idx} option = {opt} className = "col-md-4 shadow"   style={{height: '300px', width: '100%'}} />
+               ))}
+               </div>
+           )
+       }
+      return (
+    <div className="container" id="container">
+        {figs}
     </div>
+    )
     
-      )}
+    }
     drawSubPlot(data, idx) {
         // const DATA = this.state.DATA; // data;
         const DATA = data;
@@ -266,6 +289,6 @@ class Content extends React.Component {
         });
         */
     }
-  }
+}
   
 export default Content;
